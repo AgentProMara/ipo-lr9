@@ -29,3 +29,14 @@ def intersectionAreaRect(rect1, rect2):
     y_overlap = max(0, min(y1_max, y2_max) - max(y1_min, y2_min))
 
     return x_overlap * y_overlap
+
+def intersectionAreaMultiRect(rectangles):
+    total_intersection_area = 0
+
+    for i, rect1 in enumerate(rectangles):
+        if not isCorrectRect(rect1):
+            raise RectCorrectError(f"{i + 1}й прямоугольник некоректный")
+        for rect2 in rectangles[i+1:]:
+            total_intersection_area += intersectionAreaRect(rect1, rect2)
+
+    return total_intersection_area
